@@ -76,7 +76,7 @@ def get_promotions() -> List[PromotionGame]:
             e["url"] = f"{URL_PRODUCT_PAGE.rstrip('/')}/{e['offerMappings'][0]['pageSlug']}"
         except (KeyError, IndexError):
             if e.get("productSlug"):
-                e["url"] = f"{URL_PRODUCT_BUNDLES.rstrip('/')}/{e['productSlug']}"
+                e["url"] = f"{URL_PRODUCT_PAGE.rstrip('/')}/{e['productSlug']}"
             else:
                 logger.info(f"Failed to get URL: {e}")
                 continue
@@ -280,7 +280,7 @@ class EpicGames:
                 continue
 
             # 将免费游戏添加至购物车
-            add_to_cart_btn = page.locator("//aside//button[@data-testid='add-to-cart-cta-button']")
+            add_to_cart_btn = page.locator("//aside//button[@data-testid='add-to-cart-cta-button-pdp-sidebar']")
             try:
                 text = await add_to_cart_btn.text_content()
                 if text == "View In Cart":
